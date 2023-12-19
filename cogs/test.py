@@ -17,16 +17,9 @@ class Test(commands.Cog):
         await ctx.channel.send(embed=discord.Embed(description=f'** Deleted {amount} messages.**', color=0x0c0c0c),
                                delete_after=3)
 
-    @clear.error
-    async def clear_error(self, error, ctx):
-        if isinstance(error, MissingPermissions):
-            return await ctx.send(
-                embed=discord.Embed(description=f'** {ctx.author.name}, you dont have permissions.**', color=0x0c0c0c))
-
-        return await ctx.send(embed=discord.Embed(
-            description=f'** Unexpected error, please contact <@329544761302056962>.**\n\n```{error}\n```',
-            color=0x0c0c0c))
-
+    @commands.command()
+    async def hello(self, ctx: commands.Context):
+        await ctx.send(f'Hello {ctx.message.author.mention}!')
 
 async def setup(bot):
     await bot.add_cog(Test(bot))
